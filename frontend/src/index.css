@@ -1,0 +1,26 @@
+@tailwindcss base;
+@tailwindcss components;
+@tailwindcss utilities;
+
+@layer base {
+  body {
+    font-family: 'Inter', 'Noto Sans Ethiopic', sans-serif;
+  }
+}
+
+.ethiopic-text {
+  font-family: 'Noto Sans Ethiopic', sans-serif;
+}
+
+@keyframes pulse-red {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7);
+  }
+  50% {
+    box-shadow: 0 0 0 15px rgba(239, 68, 68, 0);
+  }
+}
+
+.animate-pulse-red {
+  animation: pulse-red 2s infinite;
+}
