@@ -31,7 +31,7 @@ const patientCaseSchema = new mongoose.Schema({
   },
   primaryLanguage: {
     type: String,
-    enum: ['amharic', 'oromo', 'tigrinya'],
+    enum: ['amharic', 'oromo', 'tigrinya', 'english'],
     default: 'amharic'
   },
   audioUrl: {
