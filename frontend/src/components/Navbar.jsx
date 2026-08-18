@@ -1,8 +1,9 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { LANGUAGES } from '../utils/languages';
-import { Activity, Stethoscope, BarChart3, Globe, LogIn } from 'lucide-react';
+import { Stethoscope, BarChart3, Globe, LogIn, Activity } from 'lucide-react';
 import { SignInButton, SignUpButton, UserButton, SignedIn, SignedOut } from '@clerk/clerk-react';
+import IconScout3DAsset from './IconScout3DAsset';
 
 export default function Navbar({ currentLang, setLanguage }) {
   const location = useLocation();
@@ -11,14 +12,14 @@ export default function Navbar({ currentLang, setLanguage }) {
   const isActive = (path) => location.pathname === path;
 
   return (
-    <nav className="sticky top-0 z-50 mono-card border-b border-slate-800/80 shadow-lg">
+    <nav className="sticky top-0 z-50 mono-card border-b border-slate-800/80 shadow-md">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
           
-          {/* Logo & Brand Identity */}
-          <Link to="/" className="flex items-center space-x-3.5 group">
-            <div className="w-10 h-10 rounded-xl bg-slate-900 border border-slate-700/80 flex items-center justify-center shadow-md group-hover:border-slate-500 transition-colors">
-              <Activity className="w-5 h-5 text-white" />
+          {/* Logo & Brand Identity with IconScout 3D Asset */}
+          <Link to="/" className="flex items-center space-x-3 group">
+            <div className="w-10 h-10 rounded-xl bg-slate-900 border border-slate-700/80 flex items-center justify-center shadow-sm group-hover:border-slate-500 transition-colors p-1">
+              <IconScout3DAsset query="stethoscope" className="w-8 h-8" alt="Tena AI Stethoscope" />
             </div>
 
             <div>
@@ -32,7 +33,7 @@ export default function Navbar({ currentLang, setLanguage }) {
                 </span>
               </div>
               <p className="text-[11px] text-slate-400 font-medium">
-                Multilingual AI Medical Triage
+                Multilingual AI Medical Triage • IconScout 3D Enabled
               </p>
             </div>
           </Link>

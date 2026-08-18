@@ -4,8 +4,9 @@ import VoiceRecorder from '../components/VoiceRecorder';
 import ImageUploader from '../components/ImageUploader';
 import TriageResultCard from '../components/TriageResultCard';
 import WebRTCRoom from '../components/WebRTCRoom';
+import IconScout3DAsset from '../components/IconScout3DAsset';
 import { LANGUAGES } from '../utils/languages';
-import { Activity, User, Send, ShieldCheck, Stethoscope, Cpu } from 'lucide-react';
+import { User, Send, ShieldCheck, Stethoscope, Cpu, CheckCircle2 } from 'lucide-react';
 import confetti from 'canvas-confetti';
 
 export default function HEWHome({ currentLang = 'amharic' }) {
@@ -69,9 +70,9 @@ export default function HEWHome({ currentLang = 'amharic' }) {
   return (
     <div className="max-w-7xl mx-auto space-y-8 py-8 px-2 sm:px-4">
       
-      {/* Header Banner */}
-      <div className="mono-card rounded-2xl p-7 shadow-md relative overflow-hidden border border-slate-800">
-        <div className="space-y-3">
+      {/* Header Banner with IconScout 3D Asset */}
+      <div className="mono-card rounded-2xl p-7 shadow-md relative overflow-hidden border border-slate-800 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+        <div className="space-y-3 max-w-3xl">
           <div className="inline-flex items-center space-x-2 bg-slate-900 border border-slate-700 px-3 py-1 rounded-md text-xs font-semibold text-slate-300">
             <Cpu className="w-3.5 h-3.5 text-slate-300" />
             <span className="uppercase tracking-wider">Ethiopian Rural Health Extension Triage Hub</span>
@@ -91,14 +92,18 @@ export default function HEWHome({ currentLang = 'amharic' }) {
               <span>Offline-First Sync</span>
             </div>
             <div className="bg-slate-950 border border-slate-800 px-3 py-1 rounded-md text-xs text-slate-400 flex items-center space-x-1.5">
-              <Activity className="w-3.5 h-3.5 text-slate-300" />
-              <span>Multilingual Speech & Vision</span>
+              <CheckCircle2 className="w-3.5 h-3.5 text-slate-300" />
+              <span>IconScout 3D & Lottie Enabled</span>
             </div>
             <div className="bg-slate-950 border border-slate-800 px-3 py-1 rounded-md text-xs text-slate-400 flex items-center space-x-1.5">
               <Stethoscope className="w-3.5 h-3.5 text-slate-300" />
               <span>Tele-Doctor Escalation</span>
             </div>
           </div>
+        </div>
+
+        <div className="shrink-0 p-3 bg-slate-900 border border-slate-800 rounded-2xl shadow-inner hidden md:block">
+          <IconScout3DAsset query="heart-rate" className="w-24 h-24" alt="3D Heart Pulse" />
         </div>
       </div>
 
@@ -110,10 +115,13 @@ export default function HEWHome({ currentLang = 'amharic' }) {
           
           {/* Patient Demographic Details */}
           <div className="mono-card rounded-2xl p-6 shadow-md space-y-4">
-            <h3 className="text-xs font-bold text-slate-300 uppercase tracking-wider flex items-center space-x-2">
-              <User className="w-4 h-4 text-slate-400 mr-1" />
-              <span>Patient Demographic Details</span>
-            </h3>
+            <div className="flex items-center justify-between border-b border-slate-800 pb-3">
+              <h3 className="text-xs font-bold text-slate-300 uppercase tracking-wider flex items-center space-x-2">
+                <User className="w-4 h-4 text-slate-400 mr-1" />
+                <span>Patient Demographic Details</span>
+              </h3>
+              <IconScout3DAsset query="pill-medicine" className="w-7 h-7" alt="3D Pill" />
+            </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
@@ -215,10 +223,8 @@ export default function HEWHome({ currentLang = 'amharic' }) {
               onStartVideoCall={(caseId) => setActiveCallCaseId(caseId)}
             />
           ) : (
-            <div className="h-full min-h-[440px] mono-card border-dashed border-slate-800 rounded-2xl flex flex-col items-center justify-center p-8 text-center space-y-3">
-              <div className="w-14 h-14 rounded-2xl bg-slate-900 border border-slate-800 flex items-center justify-center shadow-md">
-                <Activity className="w-7 h-7 text-slate-400" />
-              </div>
+            <div className="h-full min-h-[440px] mono-card border-dashed border-slate-800 rounded-2xl flex flex-col items-center justify-center p-8 text-center space-y-4">
+              <IconScout3DAsset query="shield-triage" className="w-16 h-16 opacity-80" alt="3D Health Shield" />
               <div>
                 <h3 className="text-sm font-bold text-white">No Active Triage Result Yet</h3>
                 <p className="text-xs text-slate-400 max-w-xs mt-1 leading-relaxed">
