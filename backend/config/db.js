@@ -1,14 +1,21 @@
 const mongoose = require('mongoose');
 
-const connectDB = async () => {
-  try {
-    const conn = await mongoose.connect(process.env.MONGODB_URI, {
-      serverSelectionTimeoutMS: 5000
-    });
-    console.log(`[MongoDB] Connected successfully: ${conn.connection.host}`);
-  } catch (error) {
-    console.warn(`[MongoDB Warning] Could not connect to MongoDB instance (${error.message}). Running in mock/in-memory mode for development.`);
+const connectDB = () => {
+  if (!process.env.MONGODB_URI) {
+    console.warn('[MongoDB Notice] MONGODB_URI not set. Running in mock/in-memory mode.');
+    return;
   }
+
+  mongoose
+    .connect(process.env.MONGODB_URI, {
+      serverSelectionTimeoutMS: 5000
+    })
+    .then((conn) => {
+      console.log(`[MongoDB] Connected successfully: ${conn.connection.host}`);
+    })
+    .catch((error) => {
+      console.warn(`[MongoDB Warning] Connection error (${error.message}). Server continues in mock mode.`);
+    });
 };
 
 module.exports = connectDB;
