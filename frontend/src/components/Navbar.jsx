@@ -1,7 +1,8 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { LANGUAGES } from '../utils/languages';
-import { Activity, Stethoscope, BarChart3, Globe, ShieldAlert, Sparkles } from 'lucide-react';
+import { Activity, Stethoscope, BarChart3, Globe, LogIn } from 'lucide-react';
+import { SignInButton, SignUpButton, UserButton, SignedIn, SignedOut } from '@clerk/clerk-react';
 
 export default function Navbar({ currentLang, setLanguage }) {
   const location = useLocation();
@@ -79,7 +80,7 @@ export default function Navbar({ currentLang, setLanguage }) {
             </Link>
           </div>
 
-          {/* Language Selector Dropdown (Amharic / Afaan Oromoo / Tigrinya / English) */}
+          {/* Language Selector Dropdown & Clerk Auth Controls */}
           <div className="flex items-center space-x-3">
             <div className="relative flex items-center bg-slate-800/80 border border-slate-700 rounded-xl px-3 py-1.5 shadow-sm hover:border-teal-500 transition-colors">
               <Globe className="w-4 h-4 text-teal-400 mr-2" />
@@ -93,6 +94,27 @@ export default function Navbar({ currentLang, setLanguage }) {
                 <option value="tigrinya" className="bg-slate-900 text-white">🇪🇹 ትግርኛ (Tigrinya)</option>
                 <option value="english" className="bg-slate-900 text-white">🌐 English</option>
               </select>
+            </div>
+
+            {/* Clerk Authentication Controls */}
+            <div className="flex items-center space-x-2">
+              <SignedOut>
+                <SignInButton mode="modal">
+                  <button className="flex items-center space-x-1.5 bg-teal-600 hover:bg-teal-500 text-white font-bold text-xs px-3.5 py-2 rounded-xl transition-all shadow-md">
+                    <LogIn className="w-3.5 h-3.5" />
+                    <span>Sign In</span>
+                  </button>
+                </SignInButton>
+                <SignUpButton mode="modal">
+                  <button className="hidden sm:inline-flex bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 font-bold text-xs px-3.5 py-2 rounded-xl transition-all">
+                    Sign Up
+                  </button>
+                </SignUpButton>
+              </SignedOut>
+
+              <SignedIn>
+                <UserButton afterSignOutUrl="/" />
+              </SignedIn>
             </div>
           </div>
 

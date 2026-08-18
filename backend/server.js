@@ -75,7 +75,7 @@ io.on('connection', (socket) => {
 });
 
 const PORT = process.env.PORT || 5000;
-server.listen(PORT, () => {
+server.listen(PORT, '0.0.0.0', () => {
   console.log(`===================================================`);
   console.log(`🚀 Tena AI Server running on http://localhost:${PORT}`);
   console.log(`🏥 Health Triage API: http://localhost:${PORT}/api/triage/cases`);
