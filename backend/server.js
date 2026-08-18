@@ -33,6 +33,21 @@ app.use('/api/triage', require('./routes/triageRoutes'));
 app.use('/api/doctor', require('./routes/doctorRoutes'));
 app.use('/api/analytics', require('./routes/analyticsRoutes'));
 
+// Root Endpoint
+app.get('/', (req, res) => {
+  res.setHeader('Content-Type', 'application/json');
+  res.send(JSON.stringify({
+    status: 'online',
+    system: 'Tena AI Multilingual Medical Triage & Tele-Diagnostics API',
+    endpoints: {
+      health: '/api/health',
+      triageCases: '/api/triage/cases',
+      doctorQueue: '/api/doctor/queue',
+      referralSchema: '/api/analytics/triage-schema'
+    }
+  }, null, 2));
+});
+
 // Health Check Endpoint
 app.get('/api/health', (req, res) => {
   res.status(200).json({
