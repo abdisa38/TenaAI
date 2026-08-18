@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Camera, Image as ImageIcon, X, Sparkles, Eye } from 'lucide-react';
+import { Camera, Image as ImageIcon, X, Sparkles, Eye, ScanLine, CheckCircle2 } from 'lucide-react';
 import { LANGUAGES } from '../utils/languages';
 
 export default function ImageUploader({ onImageCaptured, currentLang = 'amharic' }) {
@@ -25,24 +25,35 @@ export default function ImageUploader({ onImageCaptured, currentLang = 'amharic'
   };
 
   return (
-    <div className="bg-slate-900/90 border border-slate-800 rounded-3xl p-6 shadow-2xl">
-      <div className="flex items-center space-x-3 mb-4">
-        <div className="p-2.5 bg-teal-500/10 border border-teal-500/20 rounded-2xl">
-          <Camera className="w-6 h-6 text-teal-400" />
+    <div className="glass-panel rounded-3xl p-6 shadow-2xl relative overflow-hidden">
+      <div className="flex items-center justify-between border-b border-slate-800/80 pb-4 mb-6">
+        <div className="flex items-center space-x-3">
+          <div className="p-3 bg-teal-500/10 border border-teal-500/20 rounded-2xl glow-teal">
+            <Camera className="w-6 h-6 text-teal-400" />
+          </div>
+          <div>
+            <h3 className="text-base font-extrabold text-white font-ethiopic">{t.uploadPhotoInstruction}</h3>
+            <p className="text-xs text-slate-400">Visual Vision AI • Skin Lesions, Burns, Wounds & Eye Infections</p>
+          </div>
         </div>
-        <div>
-          <h3 className="text-lg font-bold text-slate-100">{t.uploadPhotoInstruction}</h3>
-          <p className="text-xs text-slate-400">Visual Diagnostics (Skin Lesions, Wounds, Eye Infections)</p>
-        </div>
+
+        <span className="text-[10px] font-extrabold px-3 py-1 rounded-full bg-slate-900 border border-slate-700 text-teal-300 flex items-center space-x-1">
+          <ScanLine className="w-3 h-3 text-teal-400 animate-pulse" />
+          <span>VISION SCANNER</span>
+        </span>
       </div>
 
       {!imagePreview ? (
-        <label className="border-2 border-dashed border-slate-700 hover:border-teal-500/60 bg-slate-950/60 rounded-2xl p-8 flex flex-col items-center justify-center cursor-pointer transition-colors group">
-          <ImageIcon className="w-12 h-12 text-slate-500 group-hover:text-teal-400 group-hover:scale-110 transition-all mb-3" />
-          <span className="text-sm font-semibold text-slate-300 group-hover:text-teal-300">
+        <label className="relative border-2 border-dashed border-slate-700 hover:border-teal-500/80 bg-slate-950/80 rounded-3xl p-8 flex flex-col items-center justify-center cursor-pointer transition-all group overflow-hidden shadow-inner">
+          <div className="w-16 h-16 rounded-2xl bg-teal-500/10 border border-teal-500/20 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+            <ImageIcon className="w-8 h-8 text-teal-400" />
+          </div>
+
+          <span className="text-sm font-extrabold text-slate-200 group-hover:text-teal-300 transition-colors">
             Tap to open camera or upload photo
           </span>
-          <span className="text-xs text-slate-500 mt-1">PNG, JPG up to 10MB</span>
+          <span className="text-xs text-slate-500 mt-1">Supports PNG, JPG (Auto-analyzed by Gemini Vision AI)</span>
+
           <input
             type="file"
             accept="image/*"
@@ -52,20 +63,23 @@ export default function ImageUploader({ onImageCaptured, currentLang = 'amharic'
           />
         </label>
       ) : (
-        <div className="relative rounded-2xl overflow-hidden border border-teal-500/40 group">
-          <img src={imagePreview} alt="Wound diagnostic preview" className="w-full h-48 object-cover" />
-          <div className="absolute inset-0 bg-slate-950/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+        <div className="relative rounded-3xl overflow-hidden border border-teal-500/50 group scanner-hud shadow-2xl">
+          <img src={imagePreview} alt="Wound diagnostic preview" className="w-full h-56 object-cover" />
+          
+          <div className="absolute inset-0 bg-slate-950/50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity backdrop-blur-xs">
             <button
               type="button"
               onClick={removeImage}
-              className="p-2 bg-rose-600 rounded-full text-white hover:bg-rose-700 transition-colors shadow-lg"
+              className="p-3 bg-rose-600 rounded-2xl text-white hover:bg-rose-700 transition-colors shadow-2xl flex items-center space-x-2 font-bold text-xs"
             >
-              <X className="w-6 h-6" />
+              <X className="w-5 h-5" />
+              <span>Remove Photo</span>
             </button>
           </div>
-          <div className="absolute bottom-2 left-2 bg-teal-950/80 border border-teal-600/60 text-teal-200 text-xs px-2.5 py-1 rounded-md font-semibold flex items-center space-x-1">
-            <Eye className="w-3.5 h-3.5 text-teal-300" />
-            <span>Photo Ready for Gemini Vision AI</span>
+
+          <div className="absolute bottom-3 left-3 bg-slate-950/90 border border-teal-500/60 text-teal-200 text-xs px-3 py-1.5 rounded-xl font-extrabold flex items-center space-x-2 shadow-lg backdrop-blur-md">
+            <CheckCircle2 className="w-4 h-4 text-teal-400" />
+            <span>Image Attached for Gemini Vision AI</span>
           </div>
         </div>
       )}
